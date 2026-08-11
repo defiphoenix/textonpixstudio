@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { CheckCircle2, Download, Layers, Palette, Type } from "lucide-react";
 import { AbstractBackground } from "@/components/AbstractBackground";
 import { Editor } from "@/components/Editor";
+import { SiteFooter } from "@/components/SiteFooter";
 import { SiteNav } from "@/components/SiteNav";
 import { Button } from "@/components/ui/button";
 
@@ -48,8 +49,8 @@ function Index() {
   return (
     <>
       <AbstractBackground />
-      <div className="mx-auto w-full max-w-7xl px-2 py-3 sm:px-4 sm:py-4">
-        <div className="panel-skeu rounded-[2rem] p-3 sm:p-5">
+      <div className="mx-auto w-full max-w-7xl px-1 py-3 sm:px-2 sm:py-4">
+        <div className="panel-skeu rounded-[2rem] p-2 sm:p-4">
           <SiteNav />
 
           <main className="mt-5 grid items-center gap-8 lg:grid-cols-[minmax(0,26rem)_1fr]">
@@ -79,7 +80,7 @@ function Index() {
             </section>
           </main>
 
-          <section className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <section id="features" className="mt-6 grid scroll-mt-8 gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
               <article key={f.title} className="tile-skeu rounded-2xl p-5">
                 <span className="mb-3 grid size-11 place-items-center rounded-xl bg-accent shadow-[var(--shadow-inset)]">
@@ -91,9 +92,7 @@ function Index() {
             ))}
           </section>
 
-          <footer className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
-            © {new Date().getFullYear()} TextPix — made for people who love good type.
-          </footer>
+          <SiteFooter />
         </div>
       </div>
     </>
