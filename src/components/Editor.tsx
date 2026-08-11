@@ -169,7 +169,7 @@ export function Editor() {
               textShadow: shadow ? "0 2px 14px rgba(0,0,0,0.45)" : "none",
               lineHeight: 1.2,
             }}
-            className="absolute -translate-x-1/2 -translate-y-1/2 cursor-move select-none whitespace-pre-wrap rounded-md px-2 outline-1 outline-dashed outline-white/70"
+            className="absolute -translate-x-1/2 -translate-y-1/2 cursor-move select-none whitespace-pre rounded-md px-2 outline-1 outline-dashed outline-white/70"
           >
             {text || "Your text"}
           </div>
