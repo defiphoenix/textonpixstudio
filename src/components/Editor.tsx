@@ -6,12 +6,16 @@ import {
   Bold,
   Download,
   Italic,
+  Save,
   Underline,
   UploadCloud,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import samplePhoto from "@/assets/sample-photo.jpg";
+import { useSession } from "@/hooks/useSession";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
 
 const FONTS = [
@@ -39,6 +43,9 @@ export function Editor() {
   const [align, setAlign] = useState<Align>("center");
   const [shadow, setShadow] = useState(true);
   const [pos, setPos] = useState({ x: 50, y: 45 });
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+  const { user } = useSession();
   const stageRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
@@ -77,7 +84,7 @@ export function Editor() {
     };
   }, [move]);
 
-  const download = async () => {
+  const renderCanvas = async () => {
     const img = new Image();
     img.crossOrigin = "anonymous";
     img.src = image;
@@ -89,7 +96,7 @@ export function Editor() {
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    if (!ctx) return null;
     ctx.drawImage(img, 0, 0);
 
     const stageWidth = stageRef.current?.clientWidth ?? canvas.width;
@@ -118,10 +125,55 @@ export function Editor() {
       }
     });
 
+    return canvas;
+  };
+
+  const download = async () => {
+    const canvas = await renderCanvas();
+    if (!canvas) return;
     const link = document.createElement("a");
     link.download = "textpix.png";
     link.href = canvas.toDataURL("image/png");
     link.click();
+  };
+
+  const save = async () => {
+    if (!user) return;
+    setSaving(true);
+    setStatus(null);
+    try {
+      const canvas = await renderCanvas();
+      if (!canvas) throw new Error("Could not render the image");
+      const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/png"));
+      if (!blob) throw new Error("Could not export the image");
+      const path = `${user.id}/${crypto.randomUUID()}.png`;
+      const up = await supabase.storage.from("edits").upload(path, blob, {
+        contentType: "image/png",
+      });
+      if (up.error) throw up.error;
+      const { error } = await supabase.from("edits").insert({
+        user_id: user.id,
+        title: text.split("\n")[0]?.slice(0, 60) || "Untitled",
+        image_path: path,
+        text_content: text,
+        font,
+        font_size: size,
+        color,
+        align,
+        bold,
+        italic,
+        underline,
+        shadow,
+        pos_x: pos.x,
+        pos_y: pos.y,
+      });
+      if (error) throw error;
+      setStatus("Saved to your history.");
+    } catch (e) {
+      setStatus(e instanceof Error ? e.message : "Could not save this edit.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -138,12 +190,24 @@ export function Editor() {
             <UploadCloud className="size-4 text-primary" /> Upload Image
           </span>
         </label>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-3">
+          {user ? (
+            <Button variant="tile" size="lg" className="rounded-xl" onClick={save} disabled={saving}>
+              <Save /> {saving ? "Saving…" : "Save"}
+            </Button>
+          ) : (
+            <Button variant="tile" size="lg" className="rounded-xl" asChild>
+              <Link to="/auth" search={{ mode: "signup" }}>
+                <Save /> Save to history
+              </Link>
+            </Button>
+          )}
           <Button variant="hero" size="lg" onClick={download}>
             <Download /> Download
           </Button>
         </div>
       </div>
+      {status ? <p className="mb-3 text-sm text-primary">{status}</p> : null}
 
       <div className="grid gap-3 lg:grid-cols-[1fr_17rem]">
         <div
