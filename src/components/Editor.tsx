@@ -30,7 +30,7 @@ type Align = "left" | "center" | "right";
 export function Editor() {
   const [image, setImage] = useState<string>(samplePhoto);
   const [text, setText] = useState("Find Beauty\nin every moment");
-  const [font, setFont] = useState(FONTS[0].css);
+  const [font, setFont] = useState<string>(FONTS[0]!.css);
   const [size, setSize] = useState(48);
   const [color, setColor] = useState("#ffffff");
   const [bold, setBold] = useState(true);
@@ -263,7 +263,7 @@ export function Editor() {
               </p>
               <span className="well-skeu rounded-md px-2 py-0.5 text-xs">{size}</span>
             </div>
-            <Slider min={16} max={120} value={[size]} onValueChange={([v]) => setSize(v)} />
+            <Slider min={16} max={120} value={[size]} onValueChange={(v) => setSize(v[0] ?? size)} />
           </div>
 
           <ToggleTile active={shadow} onClick={() => setShadow(!shadow)} label="Shadow" wide>
