@@ -14,7 +14,90 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      edits: {
+        Row: {
+          align: string
+          bold: boolean
+          color: string
+          created_at: string
+          font: string
+          font_size: number
+          id: string
+          image_path: string
+          italic: boolean
+          pos_x: number
+          pos_y: number
+          shadow: boolean
+          text_content: string
+          title: string
+          underline: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          align?: string
+          bold?: boolean
+          color?: string
+          created_at?: string
+          font?: string
+          font_size?: number
+          id?: string
+          image_path: string
+          italic?: boolean
+          pos_x?: number
+          pos_y?: number
+          shadow?: boolean
+          text_content?: string
+          title?: string
+          underline?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          align?: string
+          bold?: boolean
+          color?: string
+          created_at?: string
+          font?: string
+          font_size?: number
+          id?: string
+          image_path?: string
+          italic?: boolean
+          pos_x?: number
+          pos_y?: number
+          shadow?: boolean
+          text_content?: string
+          title?: string
+          underline?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
