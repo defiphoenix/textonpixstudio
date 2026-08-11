@@ -1,24 +1,101 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { CheckCircle2, Download, Layers, Palette, Type } from "lucide-react";
+import { AbstractBackground } from "@/components/AbstractBackground";
+import { Editor } from "@/components/Editor";
+import { SiteNav } from "@/components/SiteNav";
+import { Button } from "@/components/ui/button";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "TextPix — Add Beautiful Text to Your Photos";
+const description =
+  "Upload a photo, add text in 100+ fonts and styles, and export eye-catching visuals in seconds. No sign up required.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
+const features = [
+  {
+    icon: Type,
+    title: "Multiple Fonts",
+    body: "Choose from beautiful display, serif and script fonts for your text.",
+  },
+  {
+    icon: Palette,
+    title: "Custom Styles",
+    body: "Adjust colors, shadows, alignment, weight and more.",
+  },
+  {
+    icon: Layers,
+    title: "Easy to Use",
+    body: "Drag your text anywhere on the canvas. No learning curve.",
+  },
+  {
+    icon: Download,
+    title: "High Quality Export",
+    body: "Download your image at full original resolution.",
+  },
+];
+
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <AbstractBackground />
+      <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-8">
+        <div className="panel-skeu rounded-[2rem] p-4 sm:p-8">
+          <SiteNav />
+
+          <main className="mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,26rem)_1fr]">
+            <section>
+              <h1 className="text-5xl font-extrabold leading-[1.05] sm:text-6xl">
+                Add Beautiful Text to Your{" "}
+                <span className="text-gradient-primary">Images</span>
+              </h1>
+              <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground">
+                Upload your photo, add text in stunning fonts and styles, and create eye-catching
+                visuals in seconds.
+              </p>
+              <div className="mt-8">
+                <Button variant="hero" size="xl" asChild>
+                  <a href="#editor">
+                    Start Editing Now <Download />
+                  </a>
+                </Button>
+              </div>
+              <p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground">
+                <CheckCircle2 className="size-4 text-primary" /> No sign up required
+              </p>
+            </section>
+
+            <section id="editor" className="scroll-mt-8">
+              <Editor />
+            </section>
+          </main>
+
+          <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {features.map((f) => (
+              <article key={f.title} className="tile-skeu rounded-2xl p-5">
+                <span className="mb-3 grid size-11 place-items-center rounded-xl bg-accent shadow-[var(--shadow-inset)]">
+                  <f.icon className="size-5 text-primary" />
+                </span>
+                <h2 className="text-base font-bold">{f.title}</h2>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{f.body}</p>
+              </article>
+            ))}
+          </section>
+
+          <footer className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
+            © {new Date().getFullYear()} TextPix — made for people who love good type.
+          </footer>
+        </div>
+      </div>
+    </>
   );
 }
