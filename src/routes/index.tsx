@@ -48,11 +48,11 @@ function Index() {
   return (
     <>
       <AbstractBackground />
-      <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-8">
-        <div className="panel-skeu rounded-[2rem] p-4 sm:p-8">
+      <div className="mx-auto w-full max-w-7xl px-2 py-3 sm:px-4 sm:py-4">
+        <div className="panel-skeu rounded-[2rem] p-3 sm:p-5">
           <SiteNav />
 
-          <main className="mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,26rem)_1fr]">
+          <main className="mt-5 grid items-center gap-8 lg:grid-cols-[minmax(0,26rem)_1fr]">
             <section>
               <h1 className="text-5xl font-extrabold leading-[1.05] sm:text-6xl">
                 Add Beautiful Text to Your{" "}
@@ -79,7 +79,7 @@ function Index() {
             </section>
           </main>
 
-          <section className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <section className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {features.map((f) => (
               <article key={f.title} className="tile-skeu rounded-2xl p-5">
                 <span className="mb-3 grid size-11 place-items-center rounded-xl bg-accent shadow-[var(--shadow-inset)]">
@@ -91,7 +91,7 @@ function Index() {
             ))}
           </section>
 
-          <footer className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
+          <footer className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
             © {new Date().getFullYear()} TextPix — made for people who love good type.
           </footer>
         </div>
