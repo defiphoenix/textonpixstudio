@@ -155,6 +155,40 @@
 
   body {
     background-color: var(--color-background);
+    background-image: var(--gradient-page);
+    background-attachment: fixed;
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility panel-skeu {
+  background-image: var(--gradient-panel);
+  border: 1px solid oklch(1 0 0 / 0.7);
+  box-shadow: var(--shadow-skeu);
+  backdrop-filter: blur(14px);
+}
+
+@utility tile-skeu {
+  background-image: linear-gradient(170deg, oklch(1 0 0), oklch(0.965 0.015 250));
+  border: 1px solid oklch(1 0 0 / 0.9);
+  box-shadow: var(--shadow-raised);
+}
+
+@utility well-skeu {
+  background-color: oklch(0.965 0.014 250);
+  box-shadow: var(--shadow-inset);
+}
+
+@utility text-gradient-primary {
+  background-image: var(--gradient-primary);
+  background-clip: text;
+  color: transparent;
 }
