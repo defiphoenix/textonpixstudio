@@ -4,6 +4,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
 /*
  * Design system definition.
  *
@@ -63,25 +68,36 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --background: oklch(0.985 0.008 250);
+  --foreground: oklch(0.24 0.05 264);
+  --card: oklch(0.995 0.004 250);
+  --card-foreground: oklch(0.24 0.05 264);
+  --popover: oklch(0.995 0.004 250);
+  --popover-foreground: oklch(0.24 0.05 264);
+  --primary: oklch(0.62 0.16 254);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.955 0.018 250);
+  --secondary-foreground: oklch(0.33 0.06 260);
+  --muted: oklch(0.96 0.014 250);
+  --muted-foreground: oklch(0.55 0.035 258);
+  --accent: oklch(0.93 0.035 250);
+  --accent-foreground: oklch(0.34 0.08 260);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.905 0.018 253);
+  --input: oklch(0.915 0.018 253);
+  --ring: oklch(0.68 0.12 254);
+
+  --primary-glow: oklch(0.74 0.13 245);
+  --gradient-page: linear-gradient(160deg, oklch(0.99 0.006 250), oklch(0.93 0.035 248));
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  --gradient-panel: linear-gradient(160deg, oklch(1 0 0 / 0.9), oklch(0.96 0.02 250 / 0.75));
+  --shadow-skeu:
+    0 1px 0 0 oklch(1 0 0 / 0.9) inset, 0 -1px 0 0 oklch(0.7 0.05 255 / 0.12) inset,
+    0 18px 40px -18px oklch(0.5 0.09 255 / 0.35);
+  --shadow-raised:
+    0 1px 0 0 oklch(1 0 0 / 0.7) inset, 0 10px 24px -12px oklch(0.5 0.09 255 / 0.45);
+  --shadow-inset: inset 0 2px 6px oklch(0.55 0.07 255 / 0.16), 0 1px 0 oklch(1 0 0 / 0.8);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
