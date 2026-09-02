@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      bulk_projects: {
+        Row: {
+          created_at: string
+          generated_count: number
+          id: string
+          image_count: number
+          name: string
+          prompt: string
+          settings: Json
+          texts: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          generated_count?: number
+          id?: string
+          image_count?: number
+          name?: string
+          prompt?: string
+          settings?: Json
+          texts?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          generated_count?: number
+          id?: string
+          image_count?: number
+          name?: string
+          prompt?: string
+          settings?: Json
+          texts?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      design_presets: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          settings: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          settings?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          settings?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       edits: {
         Row: {
           align: string
