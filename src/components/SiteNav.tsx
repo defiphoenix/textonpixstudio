@@ -50,18 +50,24 @@ export function SiteNav() {
             {l.label}
           </Link>
         ))}
-        {user ? (
-          <Link
-            to="/history"
-            className={
-              pathname === "/history"
-                ? "well-skeu rounded-full px-5 py-2 text-sm font-semibold text-primary"
-                : "rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-            }
-          >
-            My Edits
-          </Link>
-        ) : null}
+        {user
+          ? ([
+              { to: "/dashboard", label: "Dashboard" },
+              { to: "/history", label: "My Edits" },
+            ] as const).map((l) => (
+              <Link
+                key={l.to}
+                to={l.to}
+                className={
+                  pathname === l.to
+                    ? "well-skeu rounded-full px-5 py-2 text-sm font-semibold text-primary"
+                    : "rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                }
+              >
+                {l.label}
+              </Link>
+            ))
+          : null}
       </nav>
 
       <div className="ml-auto flex items-center gap-3 md:ml-0">
