@@ -180,7 +180,7 @@ function Dashboard() {
   return (
     <PageShell
       title="Batch Dashboard"
-      subtitle="Upload a stack of photos, bring your own quotes file or let AI write them, then embed and download in one pass."
+      intro="Upload a stack of photos, bring your own quotes file or let AI write them, then embed and download in one pass."
     >
       <div className="grid gap-3 lg:grid-cols-[1fr_18rem]">
         <div className="space-y-3">
