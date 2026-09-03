@@ -69,7 +69,7 @@ export function TextList({
                 <Copy className="size-3.5" />
               </IconBtn>
               {onRegenerateOne ? (
-                <IconBtn label="Regenerate text" disabled={busy} onClick={() => onRegenerateOne(item.id)}>
+                <IconBtn label="Regenerate text" disabled={!!busy} onClick={() => onRegenerateOne(item.id)}>
                   <RefreshCw className="size-3.5" />
                 </IconBtn>
               ) : null}
