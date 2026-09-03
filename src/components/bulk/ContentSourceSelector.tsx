@@ -90,7 +90,10 @@ export function ContentSourceSelector({
     const raw = await file.text();
     if (file.name.toLowerCase().endsWith(".csv")) {
       const rows = parseCsv(raw);
-      if (!rows.length) return toast.error("That CSV looked empty.");
+      if (!rows.length) {
+        toast.error("That CSV looked empty.");
+        return;
+      }
       setCsvRows(rows);
       const header = rows[0]!;
       const guess = header.findIndex((h) => /quote|text|caption|content|line/i.test(h));
@@ -102,7 +105,10 @@ export function ContentSourceSelector({
       .split(/\r?\n/)
       .map((l) => l.trim())
       .filter(Boolean);
-    if (!lines.length) return toast.error("That text file had no usable lines.");
+    if (!lines.length) {
+      toast.error("That text file had no usable lines.");
+      return;
+    }
     toItems(lines);
     toast.success(`${lines.length} text items loaded`);
   };
@@ -112,7 +118,10 @@ export function ContentSourceSelector({
     const hasHeader = !/^[a-z0-9]+\.(jpg|jpeg|png|webp)$/i.test(header[0] ?? "");
     const body = hasHeader ? rows.slice(1) : rows;
     const lines = body.map((r) => (r[index] ?? "").trim()).filter(Boolean);
-    if (!lines.length) return toast.error("That column has no text.");
+    if (!lines.length) {
+      toast.error("That column has no text.");
+      return;
+    }
     toItems(lines);
     toast.success(`${lines.length} text items loaded from CSV`);
   };
@@ -247,7 +256,10 @@ export function ContentSourceSelector({
                 .split(/\r?\n/)
                 .map((l) => l.trim())
                 .filter(Boolean);
-              if (!lines.length) return toast.error("Add at least one line.");
+              if (!lines.length) {
+                toast.error("Add at least one line.");
+                return;
+              }
               toItems(lines);
               toast.success(`${lines.length} text items ready`);
             }}
