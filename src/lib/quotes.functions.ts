@@ -7,7 +7,7 @@ export const generateQuotes = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: Input) => ({
     prompt: String(input.prompt ?? "").slice(0, 500),
-    count: Math.min(50, Math.max(1, Math.round(Number(input.count) || 1))),
+    count: Math.min(100, Math.max(1, Math.round(Number(input.count) || 1))),
   }))
   .handler(async ({ data }) => {
     const key = process.env["LOVABLE_API_KEY"];
