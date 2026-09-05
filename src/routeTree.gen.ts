@@ -16,6 +16,7 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedBulkCreateRouteImport } from './routes/_authenticated/bulk-create'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
 
@@ -53,6 +54,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedBulkCreateRoute = AuthenticatedBulkCreateRouteImport.update({
+  id: '/bulk-create',
+  path: '/bulk-create',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/history': typeof AuthenticatedHistoryRoute
 }
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/history': typeof AuthenticatedHistoryRoute
 }
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/history': typeof AuthenticatedHistoryRoute
 }
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/bulk-create'
     | '/dashboard'
     | '/history'
   fileRoutesByTo: FileRoutesByTo
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/bulk-create'
     | '/dashboard'
     | '/history'
   id:
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/_authenticated/bulk-create'
     | '/_authenticated/dashboard'
     | '/_authenticated/history'
   fileRoutesById: FileRoutesById
@@ -191,6 +203,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/bulk-create': {
+      id: '/_authenticated/bulk-create'
+      path: '/bulk-create'
+      fullPath: '/bulk-create'
+      preLoaderRoute: typeof AuthenticatedBulkCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -209,11 +228,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBulkCreateRoute: typeof AuthenticatedBulkCreateRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBulkCreateRoute: AuthenticatedBulkCreateRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
 }
