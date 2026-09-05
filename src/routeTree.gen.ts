@@ -16,8 +16,10 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PolicyRouteImport } from './routes/policy'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedBulkCreateRouteImport } from './routes/_authenticated/bulk-create'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHistoryRouteImport } from './routes/_authenticated/history'
+import { Route as AuthenticatedProjectsRouteImport } from './routes/_authenticated/projects'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -53,6 +55,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedBulkCreateRoute = AuthenticatedBulkCreateRouteImport.update({
+  id: '/bulk-create',
+  path: '/bulk-create',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -63,6 +70,11 @@ const AuthenticatedHistoryRoute = AuthenticatedHistoryRouteImport.update({
   path: '/history',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProjectsRoute = AuthenticatedProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -71,8 +83,10 @@ export interface FileRoutesByFullPath {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/history': typeof AuthenticatedHistoryRoute
+  '/projects': typeof AuthenticatedProjectsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -81,8 +95,10 @@ export interface FileRoutesByTo {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/history': typeof AuthenticatedHistoryRoute
+  '/projects': typeof AuthenticatedProjectsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,8 +109,10 @@ export interface FileRoutesById {
   '/policy': typeof PolicyRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/_authenticated/bulk-create': typeof AuthenticatedBulkCreateRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/history': typeof AuthenticatedHistoryRoute
+  '/_authenticated/projects': typeof AuthenticatedProjectsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -105,8 +123,10 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/bulk-create'
     | '/dashboard'
     | '/history'
+    | '/projects'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -115,8 +135,10 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/bulk-create'
     | '/dashboard'
     | '/history'
+    | '/projects'
   id:
     | '__root__'
     | '/'
@@ -126,8 +148,10 @@ export interface FileRouteTypes {
     | '/policy'
     | '/privacy'
     | '/terms'
+    | '/_authenticated/bulk-create'
     | '/_authenticated/dashboard'
     | '/_authenticated/history'
+    | '/_authenticated/projects'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -191,6 +215,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/bulk-create': {
+      id: '/_authenticated/bulk-create'
+      path: '/bulk-create'
+      fullPath: '/bulk-create'
+      preLoaderRoute: typeof AuthenticatedBulkCreateRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -205,17 +236,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHistoryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/projects': {
+      id: '/_authenticated/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof AuthenticatedProjectsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedBulkCreateRoute: typeof AuthenticatedBulkCreateRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedHistoryRoute: typeof AuthenticatedHistoryRoute
+  AuthenticatedProjectsRoute: typeof AuthenticatedProjectsRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedBulkCreateRoute: AuthenticatedBulkCreateRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedHistoryRoute: AuthenticatedHistoryRoute,
+  AuthenticatedProjectsRoute: AuthenticatedProjectsRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
