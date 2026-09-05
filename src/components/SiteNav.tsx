@@ -53,6 +53,8 @@ export function SiteNav() {
         {user
           ? ([
               { to: "/dashboard", label: "Dashboard" },
+              { to: "/bulk-create", label: "Bulk Create" },
+              { to: "/projects", label: "Projects" },
               { to: "/history", label: "My Edits" },
             ] as const).map((l) => (
               <Link
